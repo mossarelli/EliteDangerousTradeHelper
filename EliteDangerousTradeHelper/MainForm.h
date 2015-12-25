@@ -63,6 +63,7 @@ namespace EDTH {
 	private: System::Windows::Forms::TextBox^  TotalTime;
 	private: System::Windows::Forms::TextBox^  ProfitSum;
 	private: System::Windows::Forms::TextBox^  LightYearTotal;
+	private: System::Windows::Forms::DataGridView^  InformationGrid;
 
 
 
@@ -93,7 +94,7 @@ namespace EDTH {
 
 
 
-	private: System::Windows::Forms::DataGridView^  dataGridView1;
+
 
 
 
@@ -153,12 +154,7 @@ namespace EDTH {
 			this->MenuExit = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->testToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->FileNameLabel = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->helpProvider1 = (gcnew System::Windows::Forms::HelpProvider());
-			this->ShipCapacityBox = (gcnew System::Windows::Forms::TextBox());
-			this->ShipCapacityLabel = (gcnew System::Windows::Forms::Label());
-			this->ProfitCapTotal = (gcnew System::Windows::Forms::TextBox());
-			this->SumLabel = (gcnew System::Windows::Forms::Label());
+			this->InformationGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->SystemBox = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->StationBox = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BuyBox = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -168,12 +164,17 @@ namespace EDTH {
 			this->ETEBox = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ProfitHBox = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ProfitCapBox = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->helpProvider1 = (gcnew System::Windows::Forms::HelpProvider());
+			this->ShipCapacityBox = (gcnew System::Windows::Forms::TextBox());
+			this->ShipCapacityLabel = (gcnew System::Windows::Forms::Label());
+			this->ProfitCapTotal = (gcnew System::Windows::Forms::TextBox());
+			this->SumLabel = (gcnew System::Windows::Forms::Label());
 			this->ProfitHTotal = (gcnew System::Windows::Forms::TextBox());
 			this->TotalTime = (gcnew System::Windows::Forms::TextBox());
 			this->ProfitSum = (gcnew System::Windows::Forms::TextBox());
 			this->LightYearTotal = (gcnew System::Windows::Forms::TextBox());
 			this->MenuM->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->InformationGrid))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MenuM
@@ -252,69 +253,21 @@ namespace EDTH {
 			this->FileNameLabel->TabIndex = 0;
 			this->FileNameLabel->Text = L"Information";
 			// 
-			// dataGridView1
+			// InformationGrid
 			// 
-			this->dataGridView1->AllowUserToResizeRows = false;
-			this->dataGridView1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->InformationGrid->AllowUserToResizeRows = false;
+			this->InformationGrid->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(9) {
+			this->InformationGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->InformationGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(9) {
 				this->SystemBox,
 					this->StationBox, this->BuyBox, this->DistanceBox, this->JumpsBox, this->ProfitBox, this->ETEBox, this->ProfitHBox, this->ProfitCapBox
 			});
-			this->dataGridView1->Location = System::Drawing::Point(12, 101);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(943, 242);
-			this->dataGridView1->TabIndex = 5;
-			// 
-			// ShipCapacityBox
-			// 
-			this->ShipCapacityBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->ShipCapacityBox->Location = System::Drawing::Point(855, 30);
-			this->ShipCapacityBox->MaxLength = 6;
-			this->ShipCapacityBox->Name = L"ShipCapacityBox";
-			this->ShipCapacityBox->Size = System::Drawing::Size(100, 20);
-			this->ShipCapacityBox->TabIndex = 6;
-			this->ShipCapacityBox->Text = L"1";
-			// 
-			// ShipCapacityLabel
-			// 
-			this->ShipCapacityLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->ShipCapacityLabel->AutoSize = true;
-			this->ShipCapacityLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->ShipCapacityLabel->Location = System::Drawing::Point(747, 29);
-			this->ShipCapacityLabel->Name = L"ShipCapacityLabel";
-			this->ShipCapacityLabel->Size = System::Drawing::Size(102, 18);
-			this->ShipCapacityLabel->TabIndex = 7;
-			this->ShipCapacityLabel->Text = L"Ship Capacity:";
-			// 
-			// ProfitCapTotal
-			// 
-			this->ProfitCapTotal->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->ProfitCapTotal->Location = System::Drawing::Point(855, 349);
-			this->ProfitCapTotal->MaxLength = 6;
-			this->ProfitCapTotal->Name = L"ProfitCapTotal";
-			this->ProfitCapTotal->ReadOnly = true;
-			this->ProfitCapTotal->Size = System::Drawing::Size(100, 20);
-			this->ProfitCapTotal->TabIndex = 8;
-			this->ProfitCapTotal->Text = L"0";
-			// 
-			// SumLabel
-			// 
-			this->SumLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->SumLabel->AutoSize = true;
-			this->SumLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->SumLabel->Location = System::Drawing::Point(12, 351);
-			this->SumLabel->Name = L"SumLabel";
-			this->SumLabel->Size = System::Drawing::Size(43, 18);
-			this->SumLabel->TabIndex = 9;
-			this->SumLabel->Text = L"Sum:";
+			this->InformationGrid->Location = System::Drawing::Point(12, 101);
+			this->InformationGrid->Name = L"InformationGrid";
+			this->InformationGrid->Size = System::Drawing::Size(943, 242);
+			this->InformationGrid->TabIndex = 5;
+			this->InformationGrid->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainForm::CellEditedProgram);
 			// 
 			// SystemBox
 			// 
@@ -373,6 +326,55 @@ namespace EDTH {
 			this->ProfitCapBox->Name = L"ProfitCapBox";
 			this->ProfitCapBox->ReadOnly = true;
 			this->ProfitCapBox->ToolTipText = L"This box is filled with calculations.";
+			// 
+			// ShipCapacityBox
+			// 
+			this->ShipCapacityBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->ShipCapacityBox->Location = System::Drawing::Point(855, 30);
+			this->ShipCapacityBox->MaxLength = 6;
+			this->ShipCapacityBox->Name = L"ShipCapacityBox";
+			this->ShipCapacityBox->Size = System::Drawing::Size(100, 20);
+			this->ShipCapacityBox->TabIndex = 6;
+			this->ShipCapacityBox->Text = L"1";
+			// 
+			// ShipCapacityLabel
+			// 
+			this->ShipCapacityLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->ShipCapacityLabel->AutoSize = true;
+			this->ShipCapacityLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->ShipCapacityLabel->Location = System::Drawing::Point(747, 29);
+			this->ShipCapacityLabel->Name = L"ShipCapacityLabel";
+			this->ShipCapacityLabel->Size = System::Drawing::Size(102, 18);
+			this->ShipCapacityLabel->TabIndex = 7;
+			this->ShipCapacityLabel->Text = L"Ship Capacity:";
+			// 
+			// ProfitCapTotal
+			// 
+			this->ProfitCapTotal->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->ProfitCapTotal->Location = System::Drawing::Point(855, 349);
+			this->ProfitCapTotal->MaxLength = 6;
+			this->ProfitCapTotal->Name = L"ProfitCapTotal";
+			this->ProfitCapTotal->ReadOnly = true;
+			this->ProfitCapTotal->Size = System::Drawing::Size(100, 20);
+			this->ProfitCapTotal->TabIndex = 8;
+			this->ProfitCapTotal->Text = L"0";
+			// 
+			// SumLabel
+			// 
+			this->SumLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->SumLabel->AutoSize = true;
+			this->SumLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->SumLabel->Location = System::Drawing::Point(12, 351);
+			this->SumLabel->Name = L"SumLabel";
+			this->SumLabel->Size = System::Drawing::Size(43, 18);
+			this->SumLabel->TabIndex = 9;
+			this->SumLabel->Text = L"Sum:";
 			// 
 			// ProfitHTotal
 			// 
@@ -435,7 +437,7 @@ namespace EDTH {
 			this->Controls->Add(this->ProfitCapTotal);
 			this->Controls->Add(this->ShipCapacityLabel);
 			this->Controls->Add(this->ShipCapacityBox);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->InformationGrid);
 			this->Controls->Add(this->FileNameLabel);
 			this->Controls->Add(this->MenuM);
 			this->MainMenuStrip = this->MenuM;
@@ -447,7 +449,7 @@ namespace EDTH {
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MenuM->ResumeLayout(false);
 			this->MenuM->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->InformationGrid))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -578,6 +580,14 @@ private: System::Void MainForm_FormClosing(System::Object^  sender, System::Wind
 }
 private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
 
+}
+private: System::Void CellEditedProgram(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+	
+	//for (int i = 0; i < sizeof(this->InformationGrid->Rows); i++)
+	//{
+	MessageBox::Show(this->InformationGrid->Rows[0]->Cells[0]->Value->ToString());
+	//}
+	
 }
 };
 }
