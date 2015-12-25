@@ -45,6 +45,7 @@ dlldata.c
 *.meta
 *.obj
 *.pch
+*.gch
 *.pdb
 *.pgc
 *.pgd
@@ -62,6 +63,11 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
 
 # Chutzpah Test files
 _Chutzpah*
@@ -163,6 +169,9 @@ ClientBin/
 node_modules/
 bower_components/
 
+# Fortran module files
+*.mod
+
 # RIA/Silverlight projects
 Generated_Code/
 
@@ -194,3 +203,38 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
