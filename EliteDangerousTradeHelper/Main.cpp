@@ -12,11 +12,19 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "MainForm.h"
+
+#using <mscorlib.dll>
+#using <System.Xml.dll>
 
 using namespace System;
+using namespace System::Xml;
 using namespace System::Windows::Forms;
-using namespace EliteDangerousTradeHelper;
+using namespace System::IO;
+
+#include "MainForm.h"
+using namespace EDTH;
+
+
 
 [STAThread]
 int main(array<System::String ^> ^args)
@@ -24,7 +32,7 @@ int main(array<System::String ^> ^args)
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	
-	EliteDangerousTradeHelper::MainForm form; //Create Class
+	EDTH::MainForm form; //Create Class
 	
 	Application::Run(%form);
 	return 0;
