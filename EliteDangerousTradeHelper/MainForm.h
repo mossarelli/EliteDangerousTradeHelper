@@ -582,12 +582,37 @@ private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^ 
 
 }
 private: System::Void CellEditedProgram(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
-	
-	//for (int i = 0; i < sizeof(this->InformationGrid->Rows); i++)
-	//{
-	MessageBox::Show(this->InformationGrid->Rows[0]->Cells[0]->Value->ToString());
-	//}
-	
+	// This function will evaluate all cells when a user changes a cell.
+	int NumberOfRows = this->InformationGrid->Rows->Count;
+	// There is always one extra row even if users doesn't use it.
+	NumberOfRows = NumberOfRows - 1;
+	String^ CellContent = L"";
+	for (int ir = 0; ir < NumberOfRows; ir++)
+	{
+		int CellCount = this->InformationGrid->Rows[ir]->Cells->Count;
+		CellCount = CellCount - 2;
+		for (int ic = 0; ic < CellCount; ic++)
+		{
+			//If cell is not empty:
+			if (this->InformationGrid->Rows[ir]->Cells[ic]->Value != nullptr)
+			{
+				String^ CellContent = this->InformationGrid->Rows[ir]->Cells[ic]->Value->ToString();
+				
+				switch (ic)
+				{
+					case 1:
+					{
+						MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Value: " + CellContent);
+						break;
+					}	
+					default: //Optional
+					{
+						MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Value: " + CellContent);
+					}
+				}
+			}
+		}	
+	}
 }
 };
 }
