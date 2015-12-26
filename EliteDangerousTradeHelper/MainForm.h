@@ -49,6 +49,20 @@ namespace EDTH {
 	private: System::Windows::Forms::TextBox^  ShipCapacityBox;
 	private: System::Windows::Forms::Label^  ShipCapacityLabel;
 	private: System::Windows::Forms::TextBox^  ProfitCapTotal;
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Label^  SumLabel;
+	private: System::Windows::Forms::TextBox^  ProfitHTotal;
+	private: System::Windows::Forms::TextBox^  TotalTime;
+	private: System::Windows::Forms::TextBox^  ProfitSum;
+	private: System::Windows::Forms::TextBox^  LightYearTotal;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  SystemBox;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  StationBox;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  BuyBox;
@@ -58,11 +72,6 @@ namespace EDTH {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  ETEBox;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  ProfitHBox;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  ProfitCapBox;
-	private: System::Windows::Forms::Label^  SumLabel;
-	private: System::Windows::Forms::TextBox^  ProfitHTotal;
-	private: System::Windows::Forms::TextBox^  TotalTime;
-	private: System::Windows::Forms::TextBox^  ProfitSum;
-	private: System::Windows::Forms::TextBox^  LightYearTotal;
 	private: System::Windows::Forms::DataGridView^  InformationGrid;
 
 
@@ -318,14 +327,14 @@ namespace EDTH {
 			this->ProfitHBox->HeaderText = L"Profit / H";
 			this->ProfitHBox->Name = L"ProfitHBox";
 			this->ProfitHBox->ReadOnly = true;
-			this->ProfitHBox->ToolTipText = L"This box is filled with calculations.";
+			this->ProfitHBox->ToolTipText = L"The Profit / H column are calculated automatically.";
 			// 
 			// ProfitCapBox
 			// 
 			this->ProfitCapBox->HeaderText = L"Profit / Capactiy";
 			this->ProfitCapBox->Name = L"ProfitCapBox";
 			this->ProfitCapBox->ReadOnly = true;
-			this->ProfitCapBox->ToolTipText = L"This box is filled with calculations.";
+			this->ProfitCapBox->ToolTipText = L"The Profit / Capacity column are calculated automatically.";
 			// 
 			// ShipCapacityBox
 			// 
@@ -337,6 +346,7 @@ namespace EDTH {
 			this->ShipCapacityBox->Size = System::Drawing::Size(100, 20);
 			this->ShipCapacityBox->TabIndex = 6;
 			this->ShipCapacityBox->Text = L"1";
+			this->ShipCapacityBox->TextChanged += gcnew System::EventHandler(this, &MainForm::ShipCapacityBox_TextChanged);
 			// 
 			// ShipCapacityLabel
 			// 
@@ -428,7 +438,7 @@ namespace EDTH {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(967, 448);
+			this->ClientSize = System::Drawing::Size(967, 374);
 			this->Controls->Add(this->LightYearTotal);
 			this->Controls->Add(this->ProfitSum);
 			this->Controls->Add(this->TotalTime);
@@ -554,6 +564,7 @@ private: System::Void MenuSaveAs_Click(System::Object^  sender, System::EventArg
 	MainForm::SaveToFile(CurrentFileName);
 }
 private: System::Void MenuExit_Click(System::Object^  sender, System::EventArgs^  e) {
+	Application::Exit();
 	if (MessageBox::Show("Quit without saving?", "Elite Dangerous Trade Helper", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::No)
 	{
 		return;
@@ -566,6 +577,7 @@ private: System::Void MenuExit_Click(System::Object^  sender, System::EventArgs^
 private: System::Void testToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e) {
+	Application::Exit();
 	if (e->CloseReason == CloseReason::UserClosing)
 	{
 		if (MessageBox::Show("Quit without saving?", "Elite Dangerous Trade Helper", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::No)
@@ -583,10 +595,27 @@ private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void CellEditedProgram(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
 	// This function will evaluate all cells when a user changes a cell.
+
 	int NumberOfRows = this->InformationGrid->Rows->Count;
-	// There is always one extra row even if users doesn't use it.
-	NumberOfRows = NumberOfRows - 1;
+	/*
+	int LightYearTotalValue = int::Parse(this->LightYearTotal->Text);
+	int ProfitSumValue = int::Parse(this->ProfitSum->Text);
+	int TotalTimeValue = int::Parse(this->TotalTime->Text);
+	int ProfitHTotalValue = int::Parse(this->ProfitHTotal->Text);
+	int ProfitCapTotalValue = int::Parse(this->ProfitCapTotal->Text);
+	*/
+
+	int LightYearTotalValue = 0;
+	int ProfitSumValue = 0;
+	int TotalTimeValue = 0;
+	int ProfitHTotalValue = 0;
+	int ProfitCapTotalValue = 0;
+
 	String^ CellContent = L"";
+
+	// There is always one extra row even if users doesn't use it. Lets avoid going to an emtpy row in a for loop.
+	NumberOfRows = NumberOfRows - 1; //>Using old C variable handling unironically.
+	
 	for (int ir = 0; ir < NumberOfRows; ir++)
 	{
 		int CellCount = this->InformationGrid->Rows[ir]->Cells->Count;
@@ -600,19 +629,123 @@ private: System::Void CellEditedProgram(System::Object^  sender, System::Windows
 				
 				switch (ic)
 				{
-					case 1:
+					case 0: //System Name
 					{
-						MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Value: " + CellContent);
+						//MessageBox::Show("Rows: " + NumberOfRows.ToString() + " System: " + CellContent);
 						break;
-					}	
-					default: //Optional
+					}
+					case 1: //Station Name
 					{
-						MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Value: " + CellContent);
+						//MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Station: " + CellContent);
+						break;
+					}
+					case 2: //Buy Name
+					{
+						//MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Commodity: " + CellContent);
+						break;
+					}
+					case 3: //Distance
+					{
+						//Check for anything but Lightyear
+						String^ pattern = "[^0-9\.,]";
+
+						Regex^ regex = gcnew Regex(pattern);
+
+						if (Regex::IsMatch(CellContent, pattern))
+						{
+							this->InformationGrid->Rows[ir]->Cells[ic]->Value = L"1.0";
+							MessageBox::Show("Distance can only be in the format: ##.# or ##,#.\nYou wrote: " + CellContent);
+						} else {
+							//Update boxes.
+						}
+						break;
+					}
+					case 4: //Jumps
+					{
+						//Check for anything but numbers
+						String^ pattern = "[^0-9]";
+
+						Regex^ regex = gcnew Regex(pattern);
+
+						if (Regex::IsMatch(CellContent, pattern))
+						{
+							this->InformationGrid->Rows[ir]->Cells[ic]->Value = L"1";
+							MessageBox::Show("Amount of jumps can only be a number.\nYou wrote: " + CellContent);
+						} else {
+							//Update boxes.
+						}
+						break;
+					}
+					case 5: //Profit
+					{
+						//Check for anything but numbers
+						String^ pattern = "[^0-9]";
+
+						Regex^ regex = gcnew Regex(pattern);
+
+						if (Regex::IsMatch(CellContent, pattern))
+						{
+							this->InformationGrid->Rows[ir]->Cells[ic]->Value = L"1";
+							MessageBox::Show("Profit can only be a number.\nYou wrote: " + CellContent);
+						} else {
+							//Update boxes.
+						}
+					}
+					case 6: //ETE
+					{
+						//Check for anything but mm:ss
+						String^ pattern = "^([0-9]?[0-9]|2[0-9]):[0-5][0-9]$";
+
+						Regex^ regex = gcnew Regex(pattern);
+
+						if (!Regex::IsMatch(CellContent, pattern))
+						{
+							this->InformationGrid->Rows[ir]->Cells[ic]->Value = L"01:00";
+							MessageBox::Show("Estimated Time Enroute can only be minutes and seconds: mm:ss.\nYou wrote: " + CellContent);
+						} else {
+							//Update boxes.
+						}
+						break;
+					}
+					case 7: //Profit / H - PROTECTED
+					{
+						String^ StringValue = this->ShipCapacityBox->Text;
+						int ShipCapacity = 0;
+						this->InformationGrid->Rows[ir]->Cells[ic]->Value = L"1000";
+						//MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Profit Hour: " + CellContent);
+						break;
+					}
+					case 8: //Profit / Capacity - PROTECTED
+					{
+						MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Profit Capacity: " + CellContent);
+						break;
+					}
+					default:
+					{
+						MessageBox::Show("Rows: " + NumberOfRows.ToString() + " Value: " + CellContent + "\n DEFAULT CASE");
 					}
 				}
 			}
 		}	
+		//Calculate Sums:
 	}
+}
+private: System::Void ShipCapacityBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+	//Check for non numbers
+	String^ pattern = "[^0-9]";
+
+	Regex^ regex = gcnew Regex(pattern);
+
+	String^ StringValue = this->ShipCapacityBox->Text;
+
+	if (Regex::IsMatch(StringValue, pattern))
+	{
+		this->ShipCapacityBox->Text = L"1";
+		MessageBox::Show("Ship Capacity can only be a number.\nYou wrote: " + StringValue);
+	} else {
+		//Update boxes.
+	}
+	
 }
 };
 }

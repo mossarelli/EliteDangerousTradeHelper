@@ -14,14 +14,17 @@
 */
 #include <iostream>
 #include <string>
+#include <regex>
 
 #using <mscorlib.dll>
 #using <System.Xml.dll>
+#using <system.dll>
 
 using namespace System;
 using namespace System::Xml;
 using namespace System::Windows::Forms;
 using namespace System::IO;
+using namespace System::Text::RegularExpressions;
 
 #include "MainForm.h"
 using namespace EDTH;
